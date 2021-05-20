@@ -2,48 +2,49 @@ import RegistrarService from './services/RegistrarService';
 const RegistrarService = new RegistrarService();
 
 import { format } from 'timeago.js';
+import Registrar from '../backend/models/Registrar';
 
 class UI {
 
   async renderBooks() {
-    const books = await RegistrarService.getBooks();
-    const booksCardContainer = document.getElementById('books-cards');
-    booksCardContainer.innerHTML = '';
-    books.forEach((book) => {
+    const Registrarse = await RegistrarService.getBooks();
+    const RegistrarseCardContainer = document.getElementById('Registrarse-cards');
+    RegistrarseCardContainer.innerHTML = '';
+    Registrarse.forEach((book) => {
       const div = document.createElement('div');
       div.className = 'animated fadeInRight';
       div.innerHTML = `
       <div class="card m-2">
         <div class="row no-gutters">
             <div class="col-md-4">
-                <img src="${book.imagePath}" class="img-fluid" alt="">
+                <img src="${Registrar.imagePath}" class="img-fluid" alt="">
             </div>
             <div class="col-md-8">
                 <div class="card-block px-2">
-                    <h4 class="card-title">${book.title}</h4>
-                    <p class="card-text">${book.author}</p>
-                    <a href="#" class="btn btn-danger delete" _id="${book._id}">X</a>
+                    <h4 class="card-title">${Registrar.title}</h4>
+                    <p class="card-text">${Registrar.author}</p>
+                    <a href="#" class="btn btn-danger delete" _id="${Registrar._id}">X</a>
                 </div>
             </div>
         </div>
         <div class="card-footer w-100 text-muted">
-          ${format(book.created_at)}
+          ${format(Registrar.created_at)}
         </div>
       </div>
       `;
-      booksCardContainer.appendChild(div);
+      RegistrarseCardContainer.appendChild(div);
     });
   }
 
-  async addANewBook(book) {
-    await RegistrarService.postBook(book);
-    this.renderBooks();
-    this.clearBookForm();
+  async addANewBook(Registrar) {
+    await RegistrarService.postBook(Registrar);
+    this.renderRegistrarse();
+    this.clearRegistrarForm();
   }
 
-  clearBookForm() {
-    document.getElementById('book-form').reset();
-    document.getElementById('title').focus();
+  clearRegistrarForm() {
+    document.getElementById('Registrar-form').reset();
+    document.getElementById('Nombre').focus();
   }
 
   renderMessage(message, colorMessage, secondsToRemove) {
@@ -55,7 +56,7 @@ class UI {
     div.appendChild(document.createTextNode(message));
     // Puting in the documnet
     const container = document.querySelector('.col-md-4');
-    const bookForm = document.querySelector('#book-form');
+    const RegistrarForm = document.querySelector('#Registrar-form');
     container.insertBefore(div, bookForm);
     // Removing the div after some secconds
     setTimeout(() => {
@@ -63,9 +64,9 @@ class UI {
     }, secondsToRemove);
   }
 
-  async deleteBook(bookId) {
-    await RegistrarService.deleteBook(bookId);
-    this.renderBooks();
+  async deleteBook(RegistrarId) {
+    await RegistrarService.deleteBook(RegistrarId);
+    this.renderRegistrarse();
   }
 
 }

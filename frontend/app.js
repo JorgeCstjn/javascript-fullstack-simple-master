@@ -1,16 +1,16 @@
 import "./styles/app.css";
 
-import Book from './models/Book.js';
+import Registrar from './models/Registrar.js';
 import UI from './UI.js';
 import Registrar from "./models/Registrar";
 
 document.addEventListener('DOMContentLoaded', () => {
   const ui = new UI();
-  ui.renderBooks();
+  ui.renderRegistrarse();
 });
 
 
-document.getElementById('book-form')
+document.getElementById('Registrar-form')
   .addEventListener('submit', function(e) {
 
     const nombre = document.getElementById('nombre').value;
@@ -42,19 +42,19 @@ document.getElementById('book-form')
       ui.renderMessage('Please fill all the fields', 'error', 3000);
     } else {
       // Pass the new book to the UI
-      ui.addANewBook(formData);
-      ui.renderMessage('New Book Added Successfully', 'success', 2000);
+      ui.addANewRegistrar(formData);
+      ui.renderMessage('New Registrar Added Successfully', 'success', 2000);
     }
 
     e.preventDefault();
   });
 
-document.getElementById('books-cards')
+document.getElementById('Registrarse-cards')
   .addEventListener('click', e => {
     const ui = new UI();
     if (e.target.classList.contains('delete')) {
-      ui.deleteBook(e.target.getAttribute('_id'));
-      ui.renderMessage('Book Deleted Successfully', 'success', 3000);
+      ui.deleteRegistrar(e.target.getAttribute('_id'));
+      ui.renderMessage('Registrar Deleted Successfully', 'success', 3000);
     }
     e.preventDefault();
   });
